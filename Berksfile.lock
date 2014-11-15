@@ -1,0 +1,7 @@
+DEPENDENCIES
+  flower
+    path: .
+    metadata: true
+
+GRAPH
+  flower (0.1.0)
