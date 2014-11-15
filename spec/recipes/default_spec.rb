@@ -14,7 +14,7 @@ describe 'flower::default' do
   it 'should create the flower user' do
     expect(chef_run).to create_user('flower').with(
       gid: 'flower',
-      system: true,
+      system: true
     )
   end
 
@@ -25,13 +25,13 @@ describe 'flower::default' do
   it 'should create a virtualenv at /opt/flower' do
     expect(chef_run).to create_python_virtualenv('/opt/flower').with(
       owner: 'flower',
-      group: 'flower',
+      group: 'flower'
     )
   end
 
   it 'should install flower' do
     expect(chef_run).to install_python_pip('flower').with(
-      virtualenv: '/opt/flower',
+      virtualenv: '/opt/flower'
     )
   end
 end
