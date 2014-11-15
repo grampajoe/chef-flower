@@ -6,10 +6,13 @@ This cookbook installs and runs the Flower monitoring service for Celery.
 Requirements
 ------------
 
-- Chef 11 or higher.
+### Cookbooks
+
+- python
 
 Usage
 -----
+
 #### flower::default
 
 Just include `flower` in your node's `run_list`:

@@ -16,3 +16,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+group 'flower'
+
+user 'flower' do
+  gid 'flower'
+  system true
+end
+
+include_recipe 'python::default'
+
+python_virtualenv '/opt/flower' do
+  owner 'flower'
+  group 'flower'
+end
+
+python_pip 'flower' do
+  virtualenv '/opt/flower'
+end

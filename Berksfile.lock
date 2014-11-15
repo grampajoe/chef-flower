@@ -4,4 +4,12 @@ DEPENDENCIES
     metadata: true
 
 GRAPH
+  build-essential (2.1.2)
   flower (0.1.0)
+    python (~> 1.4)
+  python (1.4.6)
+    build-essential (>= 0.0.0)
+    yum-epel (>= 0.0.0)
+  yum (3.4.1)
+  yum-epel (0.5.2)
+    yum (~> 3.0)
