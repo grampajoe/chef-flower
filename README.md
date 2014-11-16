@@ -1,10 +1,20 @@
 flower Cookbook
 ===============
 
+[![Build Status](https://travis-ci.org/grampajoe/chef-flower.svg?branch=master)](https://travis-ci.org/grampajoe/chef-flower)
+
 This cookbook installs and runs the Flower monitoring service for Celery.
+
+**Note: *Don't use this cookbook yet!* It's still under development and isn't ready for production use.**
 
 Requirements
 ------------
+
+### Platforms
+
+The following platforms are directly tested with KitchenCI:
+- Ubuntu 14.04
+- CentOS 6.5
 
 ### Cookbooks
 
@@ -42,6 +52,11 @@ Contributing
 4. Write your change
 5. Run the tests, ensuring they all pass
 6. Submit a Pull Request using Github
+
+Limitations
+-----------
+
+- Using a Celery app for configuration isn't currently supported.
 
 License and Authors
 -------------------
