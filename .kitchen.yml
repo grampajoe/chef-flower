@@ -16,3 +16,11 @@ suites:
     run_list:
       - rabbitmq
       - flower
+  - name: redis
+    run_list:
+      - redisio
+      - redisio::enable
+      - flower
+    attributes:
+      flower:
+        broker: 'redis://localhost:6379/0'

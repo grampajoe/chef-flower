@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: flower
-# Recipe:: default
+# Attribute:: default
 #
 # Copyright 2014, Joe Friedl
 #
@@ -17,37 +17,4 @@
 # limitations under the License.
 #
 
-group 'flower'
-
-user 'flower' do
-  gid 'flower'
-  system true
-end
-
-include_recipe 'python::default'
-
-python_virtualenv '/opt/flower' do
-  owner 'flower'
-  group 'flower'
-end
-
-python_pip 'flower' do
-  virtualenv '/opt/flower'
-  user 'flower'
-  group 'flower'
-end
-
-if node[:flower][:broker] && node[:flower][:broker].start_with?('redis://')
-  python_pip 'redis' do
-    virtualenv '/opt/flower'
-    user 'flower'
-    group 'flower'
-  end
-end
-
-template '/etc/init/flower.conf'
-
-service 'flower' do
-  provider Chef::Provider::Service::Upstart
-  action [:enable, :start]
-end
+default[:flower][:broker] = nil

@@ -3,6 +3,7 @@ DEPENDENCIES
     path: .
     metadata: true
   rabbitmq (~> 3.3.0)
+  redisio (~> 2.2.4)
 
 GRAPH
   apt (2.6.0)
@@ -20,6 +21,10 @@ GRAPH
     yum-epel (>= 0.0.0)
   rabbitmq (3.3.0)
     erlang (>= 0.9)
+  redisio (2.2.4)
+    build-essential (>= 0.0.0)
+    ulimit (>= 0.1.2)
+  ulimit (0.3.2)
   yum (3.4.1)
   yum-epel (0.5.2)
     yum (~> 3.0)

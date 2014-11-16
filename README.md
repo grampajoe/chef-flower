@@ -10,6 +10,13 @@ Requirements
 
 - python
 
+Attributes
+----------
+
+See `attributes/default.rb` for default values.
+
+- `node[:flower][:broker]` - Celery broker URL.
+
 Usage
 -----
 
