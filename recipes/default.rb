@@ -37,11 +37,14 @@ python_pip 'flower' do
   group 'flower'
 end
 
-if node[:flower][:broker] && node[:flower][:broker].start_with?('redis://')
-  python_pip 'redis' do
-    virtualenv '/opt/flower'
-    user 'flower'
-    group 'flower'
+python_pip 'redis' do
+  virtualenv '/opt/flower'
+  user 'flower'
+  group 'flower'
+
+  only_if do
+    broker = node[:flower][:broker]
+    broker && broker.start_with?('redis://')
   end
 end
 
