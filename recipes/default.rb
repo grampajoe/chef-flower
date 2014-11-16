@@ -33,4 +33,13 @@ end
 
 python_pip 'flower' do
   virtualenv '/opt/flower'
+  user 'flower'
+  group 'flower'
+end
+
+template '/etc/init/flower.conf'
+
+service 'flower' do
+  provider Chef::Provider::Service::Upstart
+  action [:enable, :start]
 end

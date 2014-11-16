@@ -14,4 +14,5 @@ platforms:
 suites:
   - name: default
     run_list:
-      - flower::default
+      - rabbitmq
+      - flower
