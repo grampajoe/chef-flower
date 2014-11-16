@@ -58,7 +58,7 @@ describe 'flower::default' do
 
     it 'should be configured to run' do
       expect(chef_run).to render_file('/etc/init/flower.conf').with_content(
-        /exec su -c "\/opt\/flower\/bin\/flower.*" flower/
+        %r{exec su -c "/opt/flower/bin/flower.*" flower}
       )
     end
   end

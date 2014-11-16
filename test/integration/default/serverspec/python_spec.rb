@@ -6,5 +6,5 @@ describe file('/opt/flower/bin/python') do
 end
 
 describe command('/opt/flower/bin/python --version') do
-  its(:stdout) { should match /Python 2.[67]/ }
+  its(:stdout) { should match(/Python 2.[67]/) }
 end
