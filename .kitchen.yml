@@ -23,4 +23,5 @@ suites:
       - flower
     attributes:
       flower:
-        broker: 'redis://localhost:6379/0'
+        config:
+          BROKER_URL: 'redis://localhost:6379/0'

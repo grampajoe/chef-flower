@@ -33,7 +33,7 @@ See `attributes/default.rb` for default values.
 
 Flower configuration:
 
-- `node[:flower][:broker]` - Celery broker URL.
+- `node[:flower][:config]` - A hash of variable names to values, e.g. `'BROKER_URL' => 'redis://localhost:6379/0'`. See http://flower.readthedocs.org/en/latest/config.html#options.
 
 Usage
 -----

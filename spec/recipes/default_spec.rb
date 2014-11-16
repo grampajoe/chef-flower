@@ -88,11 +88,32 @@ describe 'flower::default' do
     end
 
     it 'should set the broker' do
-      chef_run.node.set[:flower][:broker] = 'redis://broker-host:port/butt'
+      chef_run.node.set[:flower][:config] = {
+        'BROKER_URL' => 'redis://broker-host:port/butt'
+      }
       chef_run.converge(described_recipe)
 
       expect(chef_run).to render_file(flower_config).with_content(
         "BROKER_URL = 'redis://broker-host:port/butt'"
+      )
+    end
+
+    it 'should allow arbitrary config' do
+      chef_run.node.set[:flower][:config] = {
+        'hello' => 123,
+        'wow' => 'amazing',
+        'ALL_CAPS' => 'test'
+      }
+      chef_run.converge(described_recipe)
+
+      expect(chef_run).to render_file(flower_config).with_content(
+        "hello = '123'"
+      )
+      expect(chef_run).to render_file(flower_config).with_content(
+        "wow = 'amazing'"
+      )
+      expect(chef_run).to render_file(flower_config).with_content(
+        "ALL_CAPS = 'test'"
       )
     end
   end
