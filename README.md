@@ -25,6 +25,14 @@ Attributes
 
 See `attributes/default.rb` for default values.
 
+- `node[:flower][:user]` - User running Flower.
+- `node[:flower][:group]` - Group running Flower.
+- `node[:flower][:virtualenv]` - Virtualenv path.
+- `node[:flower][:binary]` - Path to the Flower binary. By default, this is `bin/flower` inside the virtualenv.
+- `node[:flower][:conf]` - Path to the Flower config file. By default, this is `flowerconfig.py` inside the virtualenv.
+
+Flower configuration:
+
 - `node[:flower][:broker]` - Celery broker URL.
 
 Usage
@@ -32,16 +40,7 @@ Usage
 
 #### flower::default
 
-Just include `flower` in your node's `run_list`:
-
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[flower]"
-  ]
-}
-```
+To install and run Flower, Just include `flower` in your node's `run_list`.
 
 Contributing
 ------------
@@ -56,7 +55,9 @@ Contributing
 Limitations
 -----------
 
-- Using a Celery app for configuration isn't currently supported.
+- Using an existing Celery app for configuration isn't currently supported.
+- Flower must be in its own virtualenv. Reusing an existing virtualenv isn't recommended.
+- This cookbook uses the `python` cookbook, and may be incompatible with existing Python installations.
 
 License and Authors
 -------------------

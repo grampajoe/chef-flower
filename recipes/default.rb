@@ -17,30 +17,32 @@
 # limitations under the License.
 #
 
-group 'flower'
+group node[:flower][:group]
 
-user 'flower' do
-  gid 'flower'
+user node[:flower][:user] do
+  gid node[:flower][:group]
   system true
 end
 
 include_recipe 'python::default'
 
-python_virtualenv '/opt/flower' do
-  owner 'flower'
-  group 'flower'
+python_virtualenv node[:flower][:virtualenv] do
+  owner node[:flower][:user]
+  group node[:flower][:group]
+
+  not_if { node[:flower][:virtualenv].nil? }
 end
 
 python_pip 'flower' do
-  virtualenv '/opt/flower'
-  user 'flower'
-  group 'flower'
+  user node[:flower][:user]
+  group node[:flower][:group]
+  virtualenv node[:flower][:virtualenv]
 end
 
 python_pip 'redis' do
-  virtualenv '/opt/flower'
-  user 'flower'
-  group 'flower'
+  user node[:flower][:user]
+  group node[:flower][:group]
+  virtualenv node[:flower][:virtualenv]
 
   only_if do
     broker = node[:flower][:broker]
@@ -50,9 +52,10 @@ end
 
 template '/etc/init/flower.conf'
 
-template '/opt/flower/flowerconfig.py' do
-  owner 'flower'
-  group 'flower'
+template node[:flower][:conf] do
+  source 'flowerconfig.py.erb'
+  owner node[:flower][:user]
+  group node[:flower][:group]
 end
 
 service 'flower' do

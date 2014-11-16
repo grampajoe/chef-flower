@@ -17,4 +17,12 @@
 # limitations under the License.
 #
 
+default[:flower][:user] = 'flower'
+default[:flower][:group] = 'flower'
+
+default[:flower][:virtualenv] = '/opt/flower'
+
+default[:flower][:binary] = "#{node[:flower][:virtualenv]}/bin/flower"
+default[:flower][:conf] = "#{node[:flower][:virtualenv]}/flowerconfig.py"
+
 default[:flower][:broker] = nil
