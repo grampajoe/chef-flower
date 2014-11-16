@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'flower::default' do
   let(:chef_run) { ChefSpec::SoloRunner.new }
+  let(:flower_config) { '/opt/flower/flowerconfig.py' }
 
   context 'installation' do
     before(:each) { chef_run.converge(described_recipe) }
@@ -58,7 +59,7 @@ describe 'flower::default' do
 
     it 'should be configured to run' do
       expect(chef_run).to render_file('/etc/init/flower.conf').with_content(
-        %r{exec su -c "/opt/flower/bin/flower.*" flower}
+        %r{exec su -c "/opt/flower/bin/flower --conf=#{flower_config}" flower}
       )
     end
   end
@@ -76,13 +77,22 @@ describe 'flower::default' do
     end
   end
 
-  context 'arguments' do
+  context 'the config file' do
+    it 'should render the config file' do
+      chef_run.converge(described_recipe)
+
+      expect(chef_run).to create_template(flower_config).with(
+        owner: 'flower',
+        group: 'flower'
+      )
+    end
+
     it 'should set the broker' do
       chef_run.node.set[:flower][:broker] = 'redis://broker-host:port/butt'
       chef_run.converge(described_recipe)
 
-      expect(chef_run).to render_file('/etc/init/flower.conf').with_content(
-        '--broker=redis://broker-host:port/butt'
+      expect(chef_run).to render_file(flower_config).with_content(
+        "BROKER_URL = 'redis://broker-host:port/butt'"
       )
     end
   end

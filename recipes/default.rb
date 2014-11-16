@@ -47,6 +47,11 @@ end
 
 template '/etc/init/flower.conf'
 
+template '/opt/flower/flowerconfig.py' do
+  owner 'flower'
+  group 'flower'
+end
+
 service 'flower' do
   provider Chef::Provider::Service::Upstart
   action [:enable, :start]
