@@ -43,12 +43,19 @@ describe 'flower::default' do
 
     it 'should be started with Upstart' do
       expect(chef_run).to start_service('flower').with(
-        provider: Chef::Provider::Service::Upstart
+        provider: Chef::Provider::Service::Upstart,
+        reload_command: '/sbin/stop flower; /sbin/start flower'
       )
     end
 
     it 'should have an upstart config file' do
       expect(chef_run).to render_file('/etc/init/flower.conf')
+    end
+
+    it 'should restart when the upstart config changes' do
+      resource = chef_run.find_resource('template', '/etc/init/flower.conf')
+
+      expect(resource).to notify('service[flower]').to(:restart).delayed
     end
 
     it 'should respawn' do
@@ -115,6 +122,13 @@ describe 'flower::default' do
       expect(chef_run).to render_file(flower_config).with_content(
         "ALL_CAPS = 'test'"
       )
+    end
+
+    it 'should restart the service on config changes' do
+      chef_run.converge(described_recipe)
+      resource = chef_run.find_resource('template', flower_config)
+
+      expect(resource).to notify('service[flower]').to(:restart).delayed
     end
   end
 end

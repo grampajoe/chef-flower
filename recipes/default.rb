@@ -50,15 +50,20 @@ python_pip 'redis' do
   end
 end
 
-template '/etc/init/flower.conf'
+template '/etc/init/flower.conf' do
+  notifies :restart, 'service[flower]', :delayed
+end
 
 template node[:flower][:conf] do
   source 'flowerconfig.py.erb'
   owner node[:flower][:user]
   group node[:flower][:group]
+
+  notifies :restart, 'service[flower]', :delayed
 end
 
 service 'flower' do
   provider Chef::Provider::Service::Upstart
+  reload_command '/sbin/stop flower; /sbin/start flower'
   action [:enable, :start]
 end
