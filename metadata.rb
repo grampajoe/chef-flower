@@ -8,4 +8,4 @@ version          '0.1.0'
 
 recipe 'flower', 'Installs and runs the Flower monitoring service.'
 
-depends 'python', '~> 1.4'
+depends 'python'
