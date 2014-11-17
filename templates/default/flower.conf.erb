@@ -1,3 +1,5 @@
 respawn
 
-exec su -c "<%= node[:flower][:binary] %> --conf=<%= node[:flower][:conf] %>" <%= node[:flower][:user] %>
+chdir <%= node[:flower][:virtualenv] %>
+
+exec su -c "<%= node[:flower][:binary] %>" <%= node[:flower][:user] %>

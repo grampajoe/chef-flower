@@ -19,6 +19,7 @@
 
 default[:flower][:user] = 'flower'
 default[:flower][:group] = 'flower'
+default[:flower][:version] = '0.7.3'
 
 default[:flower][:virtualenv] = '/opt/flower'
 

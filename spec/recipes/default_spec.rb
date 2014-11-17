@@ -32,6 +32,7 @@ describe 'flower::default' do
     it 'should install flower' do
       expect(chef_run).to install_python_pip('flower').with(
         virtualenv: '/opt/flower',
+        version: '0.7.3',
         user: 'flower',
         group: 'flower'
       )
@@ -44,7 +45,7 @@ describe 'flower::default' do
     it 'should be started with Upstart' do
       expect(chef_run).to start_service('flower').with(
         provider: Chef::Provider::Service::Upstart,
-        reload_command: '/sbin/stop flower; /sbin/start flower'
+        restart_command: '/sbin/stop flower; /sbin/start flower'
       )
     end
 
@@ -64,16 +65,24 @@ describe 'flower::default' do
       )
     end
 
+    it 'should chdir to the virtualenv' do
+      expect(chef_run).to render_file('/etc/init/flower.conf').with_content(
+        'chdir /opt/flower'
+      )
+    end
+
     it 'should be configured to run' do
       expect(chef_run).to render_file('/etc/init/flower.conf').with_content(
-        %r{exec su -c "/opt/flower/bin/flower --conf=#{flower_config}" flower}
+        %r{exec su -c "/opt/flower/bin/flower" flower}
       )
     end
   end
 
   context 'with a redis broker' do
     it 'should install the redis package' do
-      chef_run.node.set[:flower][:broker] = 'redis://lookitsredis:wow/amaze'
+      chef_run.node.set[:flower][:config] = {
+        'BROKER_URL' => 'redis://lookitsredis:wow/amaze'
+      }
       chef_run.converge(described_recipe)
 
       expect(chef_run).to install_python_pip('redis').with(
@@ -114,7 +123,7 @@ describe 'flower::default' do
       chef_run.converge(described_recipe)
 
       expect(chef_run).to render_file(flower_config).with_content(
-        "hello = '123'"
+        'hello = 123'
       )
       expect(chef_run).to render_file(flower_config).with_content(
         "wow = 'amazing'"

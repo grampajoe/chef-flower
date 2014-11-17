@@ -13,6 +13,6 @@ describe service('flower') do
   it { should be_running }
 end
 
-describe port(5555) do
+describe port(9001) do
   it { should be_listening }
 end

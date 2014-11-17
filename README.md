@@ -27,9 +27,10 @@ See `attributes/default.rb` for default values.
 
 - `node[:flower][:user]` - User running Flower.
 - `node[:flower][:group]` - Group running Flower.
+- `node[:flower][:version]` - Version of Flower.
 - `node[:flower][:virtualenv]` - Virtualenv path.
 - `node[:flower][:binary]` - Path to the Flower binary. By default, this is `bin/flower` inside the virtualenv.
-- `node[:flower][:conf]` - Path to the Flower config file. By default, this is `flowerconfig.py` inside the virtualenv.
+- `node[:flower][:conf]` - Path to the Flower config file. By default, this is `flowerconfig.py` inside the virtualenv. If this is changed, make sure it's still on the Python path.
 
 Flower configuration:
 

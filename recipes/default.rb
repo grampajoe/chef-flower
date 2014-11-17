@@ -37,6 +37,7 @@ python_pip 'flower' do
   user node[:flower][:user]
   group node[:flower][:group]
   virtualenv node[:flower][:virtualenv]
+  version node[:flower][:version]
 end
 
 python_pip 'redis' do
@@ -45,7 +46,7 @@ python_pip 'redis' do
   virtualenv node[:flower][:virtualenv]
 
   only_if do
-    broker = node[:flower][:broker]
+    broker = node[:flower][:config]['BROKER_URL']
     broker && broker.start_with?('redis://')
   end
 end
@@ -64,6 +65,6 @@ end
 
 service 'flower' do
   provider Chef::Provider::Service::Upstart
-  reload_command '/sbin/stop flower; /sbin/start flower'
+  restart_command '/sbin/stop flower; /sbin/start flower'
   action [:enable, :start]
 end
