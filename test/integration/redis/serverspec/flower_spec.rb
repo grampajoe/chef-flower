@@ -1,7 +1,7 @@
 require 'serverspec'
 
-describe file('/opt/flower/flowerconfig.py') do
-  its(:content) { should match %r{BROKER_URL = 'redis://localhost:6379/0'} }
+describe file('/etc/init/flower.conf') do
+  its(:content) { should match %r{--broker=redis://localhost:6379/0} }
 end
 
 describe file('/opt/flower/bin/flower') do

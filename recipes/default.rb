@@ -46,7 +46,7 @@ python_pip 'redis' do
   virtualenv node[:flower][:virtualenv]
 
   only_if do
-    broker = node[:flower][:config][:BROKER_URL]
+    broker = node[:flower][:broker]
     broker && broker.start_with?('redis://')
   end
 end

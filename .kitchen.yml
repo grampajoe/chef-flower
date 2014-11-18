@@ -23,6 +23,6 @@ suites:
       - flower
     attributes:
       flower:
+        broker: 'redis://localhost:6379/0'
         config:
           port: 9001
-          BROKER_URL: 'redis://localhost:6379/0'
