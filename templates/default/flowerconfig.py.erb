@@ -1,4 +1,4 @@
-<% node[:flower][:config].each do |name, value| %>
+<% node['flower']['config'].each do |name, value| %>
   <% if value.is_a?(Integer) %>
 <%= name %> = <%= value %>
   <% else %>
