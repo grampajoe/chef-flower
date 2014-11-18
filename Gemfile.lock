@@ -197,7 +197,7 @@ GEM
     solve (1.2.1)
       dep_selector (~> 1.0)
       semverse (~> 1.1)
-    stove (3.2.3)
+    stove (3.2.2)
       chef-api (~> 0.5)
       logify (~> 0.2)
     systemu (2.6.4)
@@ -229,5 +229,5 @@ DEPENDENCIES
   kitchen-vagrant
   rake
   rubocop (= 0.27.1)
-  stove
+  stove (= 3.2.2)
   test-kitchen (~> 1.0)
