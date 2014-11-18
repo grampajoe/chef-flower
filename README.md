@@ -5,8 +5,6 @@ flower Cookbook
 
 This cookbook installs and runs the Flower monitoring service for Celery.
 
-**Note: *Don't use this cookbook yet!* It's still under development and isn't ready for production use.**
-
 Requirements
 ------------
 
