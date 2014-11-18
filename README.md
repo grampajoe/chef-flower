@@ -11,6 +11,7 @@ Requirements
 ### Platforms
 
 The following platforms are directly tested with KitchenCI:
+
 - Ubuntu 14.04
 - CentOS 6.5
 
