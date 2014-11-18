@@ -17,36 +17,36 @@
 # limitations under the License.
 #
 
-group node[:flower][:group]
+group node['flower']['group']
 
-user node[:flower][:user] do
-  gid node[:flower][:group]
+user node['flower']['user'] do
+  gid node['flower']['group']
   system true
 end
 
 include_recipe 'python::default'
 
-python_virtualenv node[:flower][:virtualenv] do
-  owner node[:flower][:user]
-  group node[:flower][:group]
+python_virtualenv node['flower']['virtualenv'] do
+  owner node['flower']['user']
+  group node['flower']['group']
 
-  not_if { node[:flower][:virtualenv].nil? }
+  not_if { node['flower']['virtualenv'].nil? }
 end
 
 python_pip 'flower' do
-  user node[:flower][:user]
-  group node[:flower][:group]
-  virtualenv node[:flower][:virtualenv]
-  version node[:flower][:version]
+  user node['flower']['user']
+  group node['flower']['group']
+  virtualenv node['flower']['virtualenv']
+  version node['flower']['version']
 end
 
 python_pip 'redis' do
-  user node[:flower][:user]
-  group node[:flower][:group]
-  virtualenv node[:flower][:virtualenv]
+  user node['flower']['user']
+  group node['flower']['group']
+  virtualenv node['flower']['virtualenv']
 
   only_if do
-    broker = node[:flower][:broker]
+    broker = node['flower']['broker']
     broker && broker.start_with?('redis://')
   end
 end
@@ -55,10 +55,10 @@ template '/etc/init/flower.conf' do
   notifies :restart, 'service[flower]', :delayed
 end
 
-template node[:flower][:conf] do
+template node['flower']['conf'] do
   source 'flowerconfig.py.erb'
-  owner node[:flower][:user]
-  group node[:flower][:group]
+  owner node['flower']['user']
+  group node['flower']['group']
 
   notifies :restart, 'service[flower]', :delayed
 end

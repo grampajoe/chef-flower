@@ -17,14 +17,14 @@
 # limitations under the License.
 #
 
-default[:flower][:user] = 'flower'
-default[:flower][:group] = 'flower'
-default[:flower][:version] = '0.7.3'
+default['flower']['user'] = 'flower'
+default['flower']['group'] = 'flower'
+default['flower']['version'] = '0.7.3'
 
-default[:flower][:virtualenv] = '/opt/flower'
+default['flower']['virtualenv'] = '/opt/flower'
 
-default[:flower][:binary] = "#{node[:flower][:virtualenv]}/bin/flower"
-default[:flower][:conf] = "#{node[:flower][:virtualenv]}/flowerconfig.py"
+default['flower']['binary'] = "#{node['flower']['virtualenv']}/bin/flower"
+default['flower']['conf'] = "#{node['flower']['virtualenv']}/flowerconfig.py"
 
-default[:flower][:broker] = nil
-default[:flower][:config] = {}
+default['flower']['broker'] = nil
+default['flower']['config'] = {}
