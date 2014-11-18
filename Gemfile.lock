@@ -54,6 +54,9 @@ GEM
       plist (~> 3.1.0)
       pry (~> 0.9)
       rest-client (>= 1.0.4, <= 1.6.7)
+    chef-api (0.5.0)
+      logify (~> 0.1)
+      mime-types
     chef-zero (2.2.1)
       ffi-yajl (~> 1.1)
       hashie (~> 2.0)
@@ -97,6 +100,7 @@ GEM
     kitchen-vagrant (0.15.0)
       test-kitchen (~> 1.0)
     libyajl2 (1.1.0)
+    logify (0.2.0)
     method_source (0.8.2)
     mime-types (1.25.1)
     minitar (0.5.4)
@@ -193,6 +197,9 @@ GEM
     solve (1.2.1)
       dep_selector (~> 1.0)
       semverse (~> 1.1)
+    stove (3.2.3)
+      chef-api (~> 0.5)
+      logify (~> 0.2)
     systemu (2.6.4)
     test-kitchen (1.2.1)
       mixlib-shellout (~> 1.2)
@@ -222,4 +229,5 @@ DEPENDENCIES
   kitchen-vagrant
   rake
   rubocop (= 0.27.1)
+  stove
   test-kitchen (~> 1.0)
