@@ -107,7 +107,7 @@ describe 'flower::default' do
       chef_run.converge(described_recipe)
 
       expect(chef_run).to render_file(upstart_config).with_content(
-        "--broker=redis://broker-host:port/butt"
+        '--broker=redis://broker-host:port/butt'
       )
     end
 
