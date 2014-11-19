@@ -14,7 +14,7 @@ GRAPH
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
     yum-erlang_solutions (>= 0.0.0)
-  flower (1.0.2)
+  flower (1.0.3)
     python (>= 0.0.0)
   python (1.4.6)
     build-essential (>= 0.0.0)
