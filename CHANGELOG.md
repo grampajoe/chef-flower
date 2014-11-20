@@ -3,6 +3,10 @@ flower CHANGELOG
 
 This file is used to list changes made in each version of the flower cookbook.
 
+1.0.4
+-----
+- Fixed the README so Supermarket parses it right.
+
 1.0.3
 -----
 - Changed attribute keys to strings instead of symbols.
